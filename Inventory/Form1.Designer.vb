@@ -122,8 +122,16 @@ Partial Class Form1
             Me.Controls.Add(productControlGroups(i).ProductPrice)
             Me.Controls.Add(productControlGroups(i).ProductQuantity)
 
+            AddHandler productControlGroups(i).ProductQuantity.KeyPress, AddressOf TextBox_KeyPress
+
             yPosition = yPosition + 30
         Next
+    End Sub
+
+    Private Sub TextBox_KeyPress(sender As Object, e As KeyPressEventArgs)
+        If Not Char.IsDigit(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) Then
+            e.Handled = True
+        End If
     End Sub
 
     Private Sub LoadDataFromDatabase()
